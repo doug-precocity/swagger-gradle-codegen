@@ -1,0 +1,2641 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "Porte Mock API"
+    },
+    "paths": {
+        "/api/account/login": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "Login",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/account/revoketoken": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "RevokeToken",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/RevokeTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/account/refreshtoken": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "RefreshToken",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/RefreshTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/account/transactions": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "operationId": "Transactions",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/TransactionsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfIEnumerableOfTransactionsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/my/accounts": {
+            "post": {
+                "tags": [
+                    "BankAccount"
+                ],
+                "operationId": "CreateAccount",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CreateAccountRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfCreateAccountResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/my/accounts/accountSummary": {
+            "get": {
+                "tags": [
+                    "BankAccount"
+                ],
+                "operationId": "AccountSummary",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfAccountSummaryResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/cta": {
+            "get": {
+                "tags": [
+                    "CallToAction"
+                ],
+                "operationId": "GetCallToAction",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfCallToActionResult"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/cta/dismiss": {
+            "post": {
+                "tags": [
+                    "CallToAction"
+                ],
+                "operationId": "Dismiss",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/DismissRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/cta/accept": {
+            "post": {
+                "tags": [
+                    "CallToAction"
+                ],
+                "operationId": "Accept",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AcceptRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "CreateCustomer",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CreateCustomerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfCreateCustomerResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "Get",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfGetCustomerResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my/account": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "GetInfo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfGetInfoResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my/email": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "UpdateEmail",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateEmailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfUpdateEmailResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my/addresses": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "GetAddresses",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfGetAddressesResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "UpsertAddresses",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CreateAddressRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my/phones": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "AddPhone",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PhoneRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfAddPhoneResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my/phones/{phoneID}": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "GetPhone",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "phoneID",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfPhone"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "UpdatePhone",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PhoneRequest"
+                        }
+                    },
+                    {
+                        "name": "phoneID",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfAddPhoneResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my/accountUsage": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "GetAccountUsage",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfGetAccountUsageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "AddAccountUsage",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AddAccountUsageRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "options": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "GetAccountUsageOptions",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfGetAccountUsageOptionsResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/customers/my/photo": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "GetPhoto",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "image/png"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "operationId": "UploadPhoto",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "ContentType",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ContentDisposition",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Headers",
+                        "in": "formData",
+                        "required": false,
+                        "type": "object"
+                    },
+                    {
+                        "name": "Length",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "Name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "FileName",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/otp/verify/createAccount": {
+            "post": {
+                "tags": [
+                    "OTP"
+                ],
+                "operationId": "VerifyCreateAccount",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OTPVerifyCreteAccountRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfOTPVerifyCreteAccountResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/otp/resend": {
+            "post": {
+                "tags": [
+                    "OTP"
+                ],
+                "operationId": "Resend",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OTPResendRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfOTPResendResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/otp/generate/sms/login": {
+            "post": {
+                "tags": [
+                    "OTP"
+                ],
+                "operationId": "GenerateSMSOTPLogin",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OTPGenerateSMSLoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfOTPGenerateSMSLoginResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/otp/generate/sms/verify": {
+            "post": {
+                "tags": [
+                    "OTP"
+                ],
+                "operationId": "GenerateSMSOTPVerify",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OTPGenerateSMSVerifyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfOTPGenerateSMSVerifyResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/otp/generate/email/verify": {
+            "post": {
+                "tags": [
+                    "OTP"
+                ],
+                "operationId": "GenerateEmailOTPVerify",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OTPGeneraterEmailVerifyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfOTPGeneraterEmailVerifyResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/otp/authenticate": {
+            "post": {
+                "tags": [
+                    "OTP"
+                ],
+                "operationId": "Authenticate",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/OTPAuthenticateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/states": {
+            "get": {
+                "tags": [
+                    "Reference"
+                ],
+                "operationId": "GetStates",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/addressTypes": {
+            "get": {
+                "tags": [
+                    "Reference"
+                ],
+                "operationId": "GetAddressTypes",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/users/userToken": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "Update",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userToken",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserInfoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/users/confirmEmail": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "ConfirmEmail",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ConfirmEmailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/users/changePassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "ChangePassword",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userToken",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ChangePasswordInfoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/users/forgotPassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "ForgotPassword",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ForgotPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/users/resetPasswordRequest": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "ResetPasswordRequest",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserResetPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfNullResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/users/resetPassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "ResetPassword",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "action",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserResetPasswordAction"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceResponseOfUserResetPasswordActionResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/api/validate/address": {
+            "post": {
+                "description": "Use zip code 12345 to get two addresses back, otherwise one will be returned.",
+                "tags": [
+                    "Proposed"
+                ],
+                "operationId": "Validate Address",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ValidateAddressRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ValidateAddressResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "LoginRequest": {
+            "required": [
+                "username",
+                "password",
+                "clientID",
+                "deviceID"
+            ],
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "clientID": {
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "RevokeTokenRequest": {
+            "type": "object",
+            "properties": {
+                "clientId": {
+                    "type": "string"
+                }
+            }
+        },
+        "RefreshTokenRequest": {
+            "type": "object",
+            "properties": {
+                "refreshToken": {
+                    "type": "string"
+                },
+                "clientID": {
+                    "type": "string"
+                }
+            }
+        },
+        "TransactionsRequest": {
+            "type": "object",
+            "properties": {
+                "accountNumber": {
+                    "type": "string"
+                },
+                "numberOfTransactions": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "searchStartDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "searchEndDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "searchMerchant": {
+                    "type": "string"
+                },
+                "searchMinimumAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "searchMaximumAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "isPending": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "ServiceResponseOfIEnumerableOfTransactionsResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TransactionsResponse"
+                    }
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "TransactionsResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "catagory": {
+                    "type": "string"
+                },
+                "transactionDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "isPending": {
+                    "type": "boolean"
+                },
+                "memo": {
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "CreateAccountRequest": {
+            "required": [
+                "dob",
+                "ssn"
+            ],
+            "type": "object",
+            "properties": {
+                "dob": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ssn": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfCreateAccountResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/CreateAccountResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "CreateAccountResponse": {
+            "type": "object",
+            "properties": {
+                "accountNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfAccountSummaryResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/AccountSummaryResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "AccountSummaryResponse": {
+            "type": "object",
+            "properties": {
+                "totalBalance": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "bankAccounts": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BankAccountSummary"
+                    }
+                }
+            }
+        },
+        "BankAccountSummary": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "accountNumber": {
+                    "type": "string"
+                },
+                "balance": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "ServiceResponseOfCallToActionResult": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/CallToActionResult"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "CallToActionResult": {
+            "type": "object",
+            "properties": {
+                "businessActions": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CallToActionModel"
+                    }
+                },
+                "marketingActions": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CallToActionModel"
+                    }
+                }
+            }
+        },
+        "CallToActionModel": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "buttonText": {
+                    "type": "string"
+                },
+                "hookText": {
+                    "type": "string"
+                },
+                "screenCode": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "DismissRequest": {
+            "type": "object",
+            "properties": {
+                "callToActionId": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfNullResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/NullResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "NullResponse": {
+            "type": "object",
+            "properties": {}
+        },
+        "AcceptRequest": {
+            "type": "object",
+            "properties": {
+                "callToActionId": {
+                    "type": "string"
+                }
+            }
+        },
+        "CreateCustomerRequest": {
+            "required": [
+                "firstName",
+                "middleInitial",
+                "lastName",
+                "email",
+                "password",
+                "deviceID"
+            ],
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "middleInitial": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "pattern": "[A-Za-z0-9.+_-]{2,}[@][A-Za-z0-9._-]{2,}[.][A-Za-z0-9._-]{2,}",
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfCreateCustomerResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/CreateCustomerResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "CreateCustomerResponse": {
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "otpRefreshToken": {
+                    "format": "uuid",
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfGetCustomerResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/GetCustomerResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "GetCustomerResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "phones": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Phone"
+                    }
+                },
+                "addresses": {
+                    "$ref": "#/definitions/GetAddressesResponse"
+                }
+            }
+        },
+        "Phone": {
+            "type": "object",
+            "properties": {
+                "phoneID": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "verifiedFlag": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "GetAddressesResponse": {
+            "type": "object",
+            "properties": {
+                "home": {
+                    "$ref": "#/definitions/Address"
+                },
+                "mail": {
+                    "$ref": "#/definitions/Address"
+                }
+            }
+        },
+        "Address": {
+            "properties": {
+                "street1": {
+                    "type": "string"
+                },
+                "street2": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfGetInfoResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/GetInfoResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "GetInfoResponse": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "middleInitial": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateEmailRequest": {
+            "required": [
+                "email"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "pattern": "[A-Za-z0-9.+_-]{2,}[@][A-Za-z0-9._-]{2,}[.][A-Za-z0-9._-]{2,}",
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfUpdateEmailResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/UpdateEmailResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "UpdateEmailResponse": {
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "CreateAddressRequest": {
+            "type": "object",
+            "properties": {
+                "home": {
+                    "$ref": "#/definitions/AddressRequest"
+                },
+                "mail": {
+                    "$ref": "#/definitions/AddressRequest"
+                }
+            }
+        },
+        "AddressRequest": {
+            "required": [
+                "street1",
+                "city",
+                "state",
+                "zipCode"
+            ],
+            "type": "object",
+            "properties": {
+                "street1": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "street2": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "city": {
+                    "maxLength": 50,
+                    "pattern": "^[a-zA-Z]+$",
+                    "type": "string"
+                },
+                "state": {
+                    "maxLength": 2,
+                    "minLength": 2,
+                    "pattern": "^[a-zA-Z]+$",
+                    "type": "string"
+                },
+                "zipCode": {
+                    "maxLength": 5,
+                    "minLength": 5,
+                    "pattern": "(?!00000)[0-9]{5}",
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfGetAddressesResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/GetAddressesResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "PhoneRequest": {
+            "required": [
+                "phoneNumber",
+                "verifiedFlag"
+            ],
+            "type": "object",
+            "properties": {
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "verifiedFlag": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfAddPhoneResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/AddPhoneResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "AddPhoneResponse": {
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfPhone": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/Phone"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "AddAccountUsageRequest": {
+            "type": "object",
+            "properties": {
+                "occupationID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "expectedMonthlyDepositID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "expectedMonthlyWithdrawalID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "irsNotificationID": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "ServiceResponseOfGetAccountUsageOptionsResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/GetAccountUsageOptionsResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "GetAccountUsageOptionsResponse": {
+            "type": "object",
+            "properties": {
+                "accountUsageOptions": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GetAccountUsageOption"
+                    }
+                }
+            }
+        },
+        "GetAccountUsageOption": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "question": {
+                    "type": "string"
+                },
+                "answerOptions": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AccountUsageOption"
+                    }
+                }
+            }
+        },
+        "AccountUsageOption": {
+            "type": "object",
+            "properties": {
+                "order": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "answerID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "answer": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfGetAccountUsageResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/GetAccountUsageResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "GetAccountUsageResponse": {
+            "type": "object",
+            "properties": {
+                "occupationID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "expectedMonthlyDepositID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "expectedMonthlyWithdrawalID": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "irsNotificationID": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "OTPVerifyCreteAccountRequest": {
+            "required": [
+                "otpToken",
+                "otp"
+            ],
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "otp": {
+                    "maxLength": 5,
+                    "minLength": 5,
+                    "pattern": "^[0-9]+$",
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfOTPVerifyCreteAccountResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/OTPVerifyCreteAccountResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "OTPVerifyCreteAccountResponse": {
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "OTPResendRequest": {
+            "required": [
+                "otpRefreshToken",
+                "deviceID"
+            ],
+            "type": "object",
+            "properties": {
+                "otpRefreshToken": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfOTPResendResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/OTPResendResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "OTPResendResponse": {
+            "required": [
+                "otpToken",
+                "otpRefreshToken"
+            ],
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "otpRefreshToken": {
+                    "format": "uuid",
+                    "type": "string"
+                }
+            }
+        },
+        "OTPGenerateSMSLoginRequest": {
+            "required": [
+                "phoneNumber",
+                "deviceID"
+            ],
+            "type": "object",
+            "properties": {
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfOTPGenerateSMSLoginResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/OTPGenerateSMSLoginResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "OTPGenerateSMSLoginResponse": {
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "OTPGenerateSMSVerifyRequest": {
+            "required": [
+                "phoneNumber",
+                "deviceID"
+            ],
+            "type": "object",
+            "properties": {
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfOTPGenerateSMSVerifyResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/OTPGenerateSMSVerifyResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "OTPGenerateSMSVerifyResponse": {
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "OTPGeneraterEmailVerifyRequest": {
+            "required": [
+                "email",
+                "deviceID"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfOTPGeneraterEmailVerifyResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/OTPGeneraterEmailVerifyResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "OTPGeneraterEmailVerifyResponse": {
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "OTPAuthenticateRequest": {
+            "required": [
+                "otpToken",
+                "otp",
+                "deviceID"
+            ],
+            "type": "object",
+            "properties": {
+                "otpToken": {
+                    "type": "string"
+                },
+                "otp": {
+                    "maxLength": 5,
+                    "minLength": 5,
+                    "pattern": "^[0-9]+$",
+                    "type": "string"
+                },
+                "deviceID": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserInfoRequest": {
+            "required": [
+                "firstName",
+                "lastName"
+            ],
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                }
+            }
+        },
+        "ConfirmEmailRequest": {
+            "required": [
+                "email"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "ChangePasswordInfoRequest": {
+            "required": [
+                "oldPassword",
+                "newPassword"
+            ],
+            "type": "object",
+            "properties": {
+                "oldPassword": {
+                    "type": "string"
+                },
+                "newPassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "ForgotPasswordRequest": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserResetPasswordRequest": {
+            "required": [
+                "email"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserResetPasswordAction": {
+            "required": [
+                "email",
+                "token",
+                "newPassword"
+            ],
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "newPassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceResponseOfUserResetPasswordActionResponse": {
+            "type": "object",
+            "properties": {
+                "returnData": {
+                    "$ref": "#/definitions/UserResetPasswordActionResponse"
+                },
+                "errors": {
+                    "uniqueItems": false,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResponseError"
+                    }
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "UserResetPasswordActionResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "ValidateAddressRequest": {
+            "type": "object",
+            "required": [
+                "street1",
+                "zipCode"
+            ],
+            "properties": {
+                "street1": {
+                    "type": "string"
+                },
+                "street2": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "ValidateAddressResponse": {
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "returnData": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Address"
+                    }
+                }
+            }
+        }
+    }
+}

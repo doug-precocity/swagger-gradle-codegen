@@ -4,6 +4,7 @@ import com.yelp.codegen.main
 import io.swagger.parser.SwaggerParser
 import org.gradle.api.DefaultTask
 import org.gradle.api.plugins.BasePlugin
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
@@ -12,6 +13,7 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
+import org.gradle.kotlin.dsl.listProperty
 import java.io.File
 
 const val DEFAULT_PLATFORM = "kotlin"
@@ -28,104 +30,82 @@ open class GenerateTask : DefaultTask() {
     }
 
     @Input
-    @Optional
     @Option(option = "platform", description = "Configures the platform that is used for generating the code.")
-    var platform: String? = null
-
-    @Input
-    @Optional
-    @Option(option = "packageName", description = "Configures the package name of the resulting code.")
-    var packageName: String? = null
-
-    @Input
-    @Optional
-    @Option(option = "specName", description = "Configures the name of the service for the Swagger Spec.")
-    var specName: String? = null
-
-    @Input
-    @Optional
-    @Option(option = "specVersion", description = "Configures the version of the Swagger Spec.")
-    var specVersion: String? = null
-
-    @InputFile
-    @Option(option = "inputFile", description = "Configures path of the Swagger Spec.")
-    lateinit var inputFile: File
-
-    @OutputDirectory
-    @Optional
-    @Option(option = "outputDir", description = "Configures path of the Generated code directory.")
-    var outputDir: File? = null
-
-    @InputFiles
-    @Optional
-    @Option(option = "extraFiles",
-            description = "Configures path of the extra files directory to be added to the Generated code.")
-    var extraFiles: File? = null
-
-    @Nested
-    @Option(option = "featureHeaderToRemove", description = "")
-    var features: FeatureConfiguration? = null
+    var specs: ListProperty<Map<String, *>> = project.objects.listProperty()
 
     @TaskAction
     fun swaggerGenerate() {
+        specs.get().forEach{
+            val spec = SpecConfiguration()
+            spec.specVersion = it["specVersion"] as String?
+            spec.platform = it["platform"] as String?
+            spec.packageName = it["packageName"] as String?
+            spec.specName = it["specName"] as String?
+            spec.inputFile = it["inputFile"] as File
+            spec.outputDir = it["outputDir"] as File?
+            spec.features = it["features"] as Map<String,*>?
+            spec.extraFiles = it["extraFiles"] as File?
 
-        if (specVersion == null) {
-            readVersionFromSpecfile(inputFile)
-        }
-        val defaultOutputDir = File(project.buildDir, DEFAULT_OUTPUT_DIR)
+            if (spec.specVersion == null) { readVersionFromSpecfile(spec.inputFile, spec) }
+            val defaultOutputDir = File(project.buildDir, DEFAULT_OUTPUT_DIR)
 
-        println("""
+            var headersToRemove:ArrayList<String>? = spec.features?.get("headersToRemove") as ArrayList<String>?
+
+            println("""
             ####################
             Yelp Swagger Codegen
             ####################
-            Platform ${'\t'} ${platform ?: "[ DEFAULT ] $DEFAULT_PLATFORM"}
-            Package ${'\t'} ${packageName ?: "[ DEFAULT ] $DEFAULT_PACKAGE"}
-            specName ${'\t'} ${specName ?: "[ DEFAULT ] $DEFAULT_NAME"}
-            specVers ${'\t'} ${specVersion ?: "[ DEFAULT ] $DEFAULT_VERSION"}
-            input ${"\t\t"} $inputFile
-            output ${"\t\t"} ${outputDir ?: "[ DEFAULT ] $defaultOutputDir"}
-            groupId ${'\t'} ${packageName ?: "[ DEFAULT ] default"}
-            artifactId ${'\t'} ${packageName ?: "[ DEFAULT ] com.codegen"}
-            features ${'\t'} ${features?.headersToRemove?.joinToString(", ")?.ifEmpty { "[  EMPTY  ]" }}
+            Platform ${'\t'} ${spec.platform ?: "[ DEFAULT ] $DEFAULT_PLATFORM"}
+            Package ${'\t'} ${spec.packageName ?: "[ DEFAULT ] $DEFAULT_PACKAGE"}
+            specName ${'\t'} ${spec.specName ?: "[ DEFAULT ] $DEFAULT_NAME"}
+            specVers ${'\t'} ${spec.specVersion ?: "[ DEFAULT ] $DEFAULT_VERSION"}
+            input ${"\t\t"} $spec.inputFile
+            output ${"\t\t"} ${spec.outputDir ?: "[ DEFAULT ] $defaultOutputDir"}
+            groupId ${'\t'} ${spec.packageName ?: "[ DEFAULT ] default"}
+            artifactId ${'\t'} ${spec.packageName ?: "[ DEFAULT ] com.codegen"}
+            features ${'\t'} ${headersToRemove?.joinToString(", ")?.ifEmpty { "[  EMPTY  ]" }}
         """.trimIndent())
 
-        val packageName = packageName ?: DEFAULT_PACKAGE
+            val packageName = spec.packageName ?: DEFAULT_PACKAGE
 
-        val params = mutableListOf<String>()
-        params.add("-p")
-        params.add(platform ?: DEFAULT_PLATFORM)
-        params.add("-s")
-        params.add(specName ?: DEFAULT_NAME)
-        params.add("-v")
-        params.add(specVersion ?: DEFAULT_VERSION)
-        params.add("-g")
-        params.add(packageName.substringBeforeLast('.'))
-        params.add("-a")
-        params.add(packageName.substringAfterLast('.'))
-        params.add("-i")
-        params.add(inputFile.toString())
-        params.add("-o")
-        params.add((outputDir ?: defaultOutputDir).toString())
+            val params = mutableListOf<String>()
+            params.add("-p")
+            params.add(spec.platform ?: DEFAULT_PLATFORM)
+            params.add("-s")
+            params.add(spec.specName ?: DEFAULT_NAME)
+            params.add("-v")
+            params.add(spec.specVersion ?: DEFAULT_VERSION)
+            params.add("-g")
+            params.add(packageName.substringBeforeLast('.'))
+            params.add("-a")
+            params.add(packageName.substringAfterLast('.'))
+            params.add("-i")
+            params.add(spec.inputFile.toString())
+            params.add("-o")
+            params.add((spec.outputDir ?: defaultOutputDir).toString())
 
-        if (true == features?.headersToRemove?.isNotEmpty()) {
-            params.add("-ignoreheaders")
-            params.add(features?.headersToRemove?.joinToString(",") ?: "")
-        }
+            headersToRemove?.let{
+                if(it.size > 0){
+                    params.add("-ignoreheaders")
+                    params.add(it?.joinToString(","))
+                }
+            }
 
-        // Running the Codegen Main here
-        main(params.toTypedArray())
+            // Running the Codegen Main here
+            main(params.toTypedArray())
 
-        // Copy over the extra files.
-        val source = extraFiles
-        val destin = outputDir
-        if (source != null && destin != null) {
-            source.copyRecursively(destin, overwrite = true)
+            // Copy over the extra files.
+            val source = spec.extraFiles
+            val destin = spec.outputDir
+            if (source != null && destin != null) {
+                source.copyRecursively(destin, overwrite = true)
+            }
         }
     }
 
-    private fun readVersionFromSpecfile(specFile: File) {
+    private fun readVersionFromSpecfile(specFile: File, specConfig:SpecConfiguration) {
         val swaggerSpec = SwaggerParser().readWithInfo(specFile.absolutePath, listOf(), false).swagger
-        specVersion = when (val version = swaggerSpec.info.version) {
+        specConfig.specVersion = when (val version = swaggerSpec.info.version) {
             is String -> {
                 println("Successfully read version from Swagger Spec file: $version")
                 version

@@ -50,17 +50,21 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 }
 
-generateSwagger {
-    platform = "kotlin"
-    packageName = "com.yelp.codegen.integrations"
-    specName = "integration"
-    specVersion = "1.0.0"
-    inputFile = file("../sample_specs.json")
-    outputDir = file("./src/main/java/")
-    features {
-        headersToRemove = ["Accept-Language"]
-    }
-}
+//generateSwagger {
+//    specs = [
+//        {
+//            platform = "kotlin"
+//            packageName = "com.yelp.codegen.integrations"
+//            specName = "integration"
+//            specVersion = "1.0.0"
+//            inputFile = file("../sample_specs.json")
+//            outputDir = file("./src/main/java/")
+//            features {
+//                headersToRemove = ["Accept-Language"]
+//            }
+//        }
+//    ]
+//}
 
 repositories {
     mavenCentral()

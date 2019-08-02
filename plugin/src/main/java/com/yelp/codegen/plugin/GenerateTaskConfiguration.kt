@@ -1,18 +1,11 @@
 package com.yelp.codegen.plugin
 
-import org.gradle.api.Action
-import org.gradle.api.Project
-import java.io.File
+import org.gradle.api.model.ObjectFactory
+import org.gradle.api.provider.ListProperty
+import org.gradle.kotlin.dsl.listProperty
+import javax.inject.Inject
 
-open class GenerateTaskConfiguration(project: Project) {
-    var platform: String? = null
-    var packageName: String? = null
-    var specName: String? = null
-    var specVersion: String? = null
-    lateinit var inputFile: File
-    var outputDir: File? = null
-    var extraFiles: File? = null
-    var features: FeatureConfiguration = FeatureConfiguration()
+open class GenerateTaskConfiguration @Inject constructor(objects: ObjectFactory) {
+    var specs: ListProperty<Map<String, *>> = objects.listProperty()
 
-    fun features(action: Action<FeatureConfiguration>) = action.execute(features)
 }

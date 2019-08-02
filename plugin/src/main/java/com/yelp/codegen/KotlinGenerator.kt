@@ -44,7 +44,9 @@ class KotlinGenerator : SharedCodegen() {
             "DELETE" to "retrofit2.http.DELETE",
             "PATCH" to "retrofit2.http.PATCH",
             "POST" to "retrofit2.http.POST",
-            "PUT" to "retrofit2.http.PUT"
+            "PUT" to "retrofit2.http.PUT",
+            "OPTIONS" to "retrofit2.http.OPTIONS",
+            "HEAD" to "retrofit2.http.HEAD"
     )
 
     /**

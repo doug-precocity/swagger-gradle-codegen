@@ -56,13 +56,17 @@ dependencies {
     testImplementation "com.squareup.okhttp3:mockwebserver:3.12.3"
 }
 
-generateSwagger {
-    platform = "kotlin"
-    packageName = "com.yelp.codegen.generatecodesamples"
-    specName = "junittests"
-    inputFile = file("./junit_tests_specs.json")
-    outputDir = file("./src/main/java/")
-}
+//generateSwagger {
+//    specs = [
+//        {
+//            platform = "kotlin"
+//            packageName = "com.yelp.codegen.generatecodesamples"
+//            specName = "junittests"
+//            inputFile = file("./junit_tests_specs.json")
+//            outputDir = file("./src/main/java/")
+//        }
+//    ]
+//}
 
 repositories {
     mavenCentral()

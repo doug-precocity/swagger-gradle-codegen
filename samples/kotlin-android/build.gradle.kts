@@ -36,17 +36,23 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 }
 
-generateSwagger {
-    platform = "kotlin"
-    packageName = "com.yelp.codegen.samples"
-    specName = "sample_specs"
-    specVersion = "1.0.0"
-    inputFile = file("../sample_specs.json")
-    outputDir = file("./src/main/java/")
-    features {
-        headersToRemove = arrayOf("Accept-Language")
-    }
-}
+val specList = getObjects().listProperty<Map<*,*>>()
+
+//generateSwagger {
+//    specs=specList
+//        {
+//            platform = "kotlin"
+//            packageName = "com.yelp.codegen.samples"
+//            specName = "sample_specs"
+//            specVersion = "1.0.0"
+//            inputFile = file("../sample_specs.json")
+//            outputDir = file("./src/main/java/")
+//            features {
+//                headersToRemove = arrayOf("Accept-Language")
+//            }
+//        }
+//    }
+//}
 
 repositories {
     mavenCentral()
