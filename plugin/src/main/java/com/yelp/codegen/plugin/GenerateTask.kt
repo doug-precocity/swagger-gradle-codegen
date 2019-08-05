@@ -103,8 +103,9 @@ open class GenerateTask : DefaultTask() {
         }
     }
 
-    private fun readVersionFromSpecfile(specFile: File, specConfig:SpecConfiguration) {
-        val swaggerSpec = SwaggerParser().readWithInfo(specFile.absolutePath, listOf(), false).swagger
+    private fun readVersionFromSpecfile(specFile: File?, specConfig:SpecConfiguration) {
+        println("specFile = "+specFile?.absolutePath)
+        val swaggerSpec = SwaggerParser().readWithInfo(specFile?.absolutePath, listOf(), false).swagger
         specConfig.specVersion = when (val version = swaggerSpec.info.version) {
             is String -> {
                 println("Successfully read version from Swagger Spec file: $version")

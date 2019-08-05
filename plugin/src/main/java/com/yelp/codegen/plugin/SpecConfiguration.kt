@@ -33,7 +33,7 @@ class SpecConfiguration {
 
 	@InputFile
 	@Option(option = "inputFile", description = "Configures path of the Swagger Spec.")
-	lateinit var inputFile: File
+	var inputFile: File? = null
 
 	@OutputDirectory
 	@Optional
