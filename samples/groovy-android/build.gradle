@@ -66,6 +66,32 @@ dependencies {
 //    ]
 //}
 
+generateSwagger {
+    specs = [
+        [
+            platform : "kotlin",
+            packageName : "com.porte.data.remote",
+            specName : "porte",
+            inputFile : file("./src/main/java/porte-swagger.json"),
+            outputDir : file("./src/main/java/"),
+            features : [
+                headersToRemove : ["Accept-Language"]
+            ]
+        ] ,
+        [
+            platform : "kotlin",
+            packageName : "com.yelp.codegen.generatecodesamples",
+            specName : "generatecodesamples",
+            inputFile : file("./simplified_pet_store.json"),
+            outputDir : file("./src/main/java/"),
+            features : [
+                headersToRemove : ["Accept-Language"]
+            ]
+        ]
+    ]
+
+}
+
 repositories {
     mavenCentral()
 }
