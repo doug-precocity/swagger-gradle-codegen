@@ -1,6 +1,6 @@
 # Swagger Gradle Codegen
 
-[![Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/yelp/codegen/plugin/com.yelp.codegen.plugin.gradle.plugin/maven-metadata.xml.svg?label=Gradle%20Plugin%20Portal&colorB=brightgreen)](https://plugins.gradle.org/plugin/com.yelp.codegen.plugin) [![Build Status](https://travis-ci.com/Yelp/swagger-gradle-codegen.svg?branch=master)](https://travis-ci.com/Yelp/swagger-gradle-codegen) [![License](https://img.shields.io/badge/license-Apache2.0%20License-orange.svg)](https://opensource.org/licenses/Apache2.0) [![Twitter](https://img.shields.io/badge/Twitter-@YelpEngineering-blue.svg)](https://twitter.com/YelpEngineering)
+[![Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/yelp/codegen/plugin/com.yelp.codegen.plugin.gradle.plugin/maven-metadata.xml.svg?label=Gradle%20Plugin%20Portal&colorB=brightgreen)](https://plugins.gradle.org/plugin/com.yelp.codegen.plugin) [![Pre Merge Checks](https://github.com/Yelp/swagger-gradle-codegen/workflows/Pre%20Merge%20Checks/badge.svg)](https://github.com/Yelp/swagger-gradle-codegen/actions) [![License](https://img.shields.io/badge/license-Apache2.0%20License-orange.svg)](https://opensource.org/licenses/Apache2.0) [![Join the chat at https://kotlinlang.slack.com](https://img.shields.io/badge/slack-@kotlinlang/swagger--gradle--codegen-yellow.svg?logo=slack)](https://kotlinlang.slack.com/archives/CU233PG2Z) [![Twitter](https://img.shields.io/badge/Twitter-@YelpEngineering-blue.svg)](https://twitter.com/YelpEngineering)
 
 A Gradle plugin to **generate networking code** from a **Swagger spec file**.
 
@@ -41,10 +41,10 @@ plugins {
 }
 
 generateSwagger {
-    platform = "kotlin"
-    packageName = "com.yelp.codegen.samples"
-    inputFile = file("./sample_specs.json")
-    outputDir = file("./src/main/java/")
+    platform.set("kotlin")
+    packageName.set("com.yelp.codegen.samples")
+    inputFile.set(file("./sample_specs.json"))
+    outputDir.set(project.layout.buildDirectory.dir("./src/main/java/"))
 }
 ```
 
@@ -56,7 +56,7 @@ Once you setup the plugin correctly, you can call the `:generateSwagger` gradle 
 
 In order to run this gradle plugin you need to fulfill the following requirements:
 
-* Gradle 5.x - This plugin uses Gradle 5 features, and you will need to setup your Gradle wrapper to use 5.0 or more.
+* Gradle 5.x - This plugin uses Gradle 5 features, and you will need to setup your Gradle wrapper to use 5.4.1 or more.
 * Java 8+
 
 ## Supported platforms
@@ -67,7 +67,8 @@ Here the list of the supported platforms:
 
 | Platform | Description                                |
 | -------- | ------------------------------------------ |
-| `kotlin` | Generates Kotlin code and Retrofit interfaces, with RxJava2 for async calls, Moshi for serialization and ThreeTenABP for Data management |
+| `kotlin` | Generates Kotlin code and Retrofit interfaces, with RxJava2 for async calls and Moshi for serialization |
+| `kotlin-coroutines` | Generates Kotlin code and Retrofit interfaces, with [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) for async calls and Moshi for serialization |
 
 We're looking forward to more platforms to support in the future. Contributions are more than welcome.
 
@@ -75,13 +76,15 @@ We're looking forward to more platforms to support in the future. Contributions 
 
 You can find some **examples** in this repository to help you set up your generator environment.
 
-* [samples/generated-code](/samples/generated-code) Contains an example of an Android Library where the code is generated inside the `/scr/main/java` folder. You can use this example to see how the generated code will _look like_ (like [here](/samples/generated-code/src/main/java/com/yelp/codegen/generatecodesamples/apis/DefaultApi.kt))
-
 * [samples/groovy-android](/samples/groovy-android) Contains an example of an Android Library configured with a `build.gradle` file, using the classical Gradle/Groovy as scripting language.
 
 * [samples/kotlin-android](/samples/kotlin-android) Contains an example of an Android Library configured with a `build.gradle.kts` file, using Kotlin as scripting language.
 
-* [samples/junit-tests](/samples/junit-tests) This sample contains specs used to test edge cases and scenarios that have been reported in the issue tracker or that are worth testing.
+* [samples/kotlin-coroutines](/samples/kotlin-coroutines) Contains an example of an Android Library configured to output Kotlin Coroutines capable code.
+
+* [samples/junit-tests](/samples/junit-tests) This sample contains specs used to test edge cases and scenarios that have been reported in the issue tracker or that are worth testing. Tests are executed using [`moshi-codegen`](https://github.com/square/moshi#codegen).
+ It does also contains all the generated code inside the `/scr/main/java` folder. You can use this example to see how the generated code will _look like_ (like [here](/samples/junit-tests/src/main/java/com/yelp/codegen/generatecodesamples/apis/ResourceApi.kt)).
+
 
 ## How the generated code will look like
 
@@ -93,14 +96,14 @@ To configure the generator, please use the `generateSwagger { }` block. Here an 
 
 ```kotlin
 generateSwagger {
-    platform = "kotlin"
-    packageName = "com.yelp.codegen.integrations"
-    specName = "integration"
-    specVersion = "1.0.0"
-    inputFile = file("../sample_specs.json")
-    outputDir = file("./src/main/java/")
+    platform.set("kotlin")
+    packageName.set("com.yelp.codegen.integrations")
+    specName.set("integration")
+    specVersion.set("1.0.0")
+    inputFile.set(file("../sample_specs.json"))
+    outputDir.set(project.layout.buildDirectory.dir("./src/main/java/"))
     features {
-        headersToRemove = ["Accept-Language"]
+        headersToRemove.add("Accept-Language")
     }
 }
 ```
@@ -131,7 +134,7 @@ Here a list of all the supported features:
 
 | Feature | Description | Command line |
 | -------- | ----------- | ------------ |
-| `headersToRemove` | List of headers that needs to be ignored for every endpoints. The headers in this list will be dropped and not generated as parameters for the endpoints. | `--featureHeaderToRemove=` |
+| `headersToRemove` | List of headers that needs to be ignored for every endpoints. The headers in this list will be dropped and not generated as parameters for the endpoints. | `-ignoreheaders=` |
 
 
 ## Building
@@ -149,20 +152,24 @@ We also recommend you set up:
 Before starting developing, please run:
 
 ```
-make install-hooks
+./gradlew installHooks
 ```
 
 This will take care of installing the pre-commit hooks to keep a consistent style in the codebase.
 
-While developing, you can run tests on the plugin using:
+While developing, you can build, run pre-commits, checks & tests on the plugin using:
 
 ```
-./gradlew plugin:test
+./gradlew preMerge
 ```
 
 Make sure your tests are all green ✅ locally before submitting PRs.
 
-## Contributing
+NOTE: If you don't have the [Android SDK](https://developer.android.com/studio/releases/sdk-tools) you can skip the Android related tasks by setting `SKIP_ANDROID` enviromental variable (tests will be run on the CI anyway).
+
+## Contributing/Support
+
+Support for this project is offered in the [#swagger-gradle-codegen](https://kotlinlang.slack.com/archives/CU233PG2Z) channel on the Kotlinlang slack ([request an invite here](http://slack.kotlinlang.org/)).
 
 We're looking for contributors! Feel free to open issues/pull requests to help me improve this project.
 

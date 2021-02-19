@@ -1,0 +1,7 @@
+/**{{#description}}
+* {{{description}}}{{/description}}
+* Values: {{#allowableValues}}{{#enumVars}}{{&name}}{{^-last}},{{/-last}}{{/enumVars}}{{/allowableValues}}
+*/
+@JsonClass(generateAdapter = false)
+enum class {{classname}}(val value: {{dataType}}) {
+{{#allowableValues}}{{#enumVars}}    @Json(name = {{{value}}}) {{&name}}({{{value}}}){{^-last}},{{/-last}}{{{newline}}}{{/enumVars}}{{/allowableValues}}}

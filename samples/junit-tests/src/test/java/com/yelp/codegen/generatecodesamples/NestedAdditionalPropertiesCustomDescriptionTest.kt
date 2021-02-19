@@ -5,8 +5,8 @@ import com.yelp.codegen.generatecodesamples.models.TopLevelMap
 import com.yelp.codegen.generatecodesamples.tools.MockServerApiRule
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -17,18 +17,22 @@ class NestedAdditionalPropertiesCustomDescriptionTest {
 
     @Test
     fun nestedAdditionalProperties() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "key1": {
-                    "subkey1": "subvalue1",
-                    "subkey2": "subvalue2"
-                },
-                "key2": {
-                    "subkey1": "subvalue1"
-                },
-                "key3": {}
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "key1": {
+                        "subkey1": "subvalue1",
+                        "subkey2": "subvalue2"
+                    },
+                    "key2": {
+                        "subkey1": "subvalue1"
+                    },
+                    "key3": {}
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<ResourceApi>().getNestedAdditionalProperties().blockingGet()
 

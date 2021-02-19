@@ -25,154 +25,152 @@ import retrofit2.http.Headers
 @JvmSuppressWildcards
 interface ResourceApi {
     /**
-     * Test brackets in parameter name
-     * Make sure that brackets in parameter name are treated properly
-     * The endpoint is owned by junittests service owner
-     * @param page (optional)
-     * @param page2 (optional)
-     * @param datePostedBefore (optional)
-     * @param datePostedStrictlyBefore (optional)
-     * @param datePostedAfter (optional)
-     * @param datePostedStrictlyAfter (optional)
-     */
-    @Headers(
-            "X-Operation-ID: getBracketsInParameterName"
-    )
-
-    @GET("/brackets/in/parameter/name")
-    fun getBracketsInParameterName(
-        @retrofit2.http.Query("page") page: String?,
-        @retrofit2.http.Query("page[]") page2: String?,
-        @retrofit2.http.Query("datePosted[before]") datePostedBefore: String?,
-        @retrofit2.http.Query("datePosted[strictly_before]") datePostedStrictlyBefore: String?,
-        @retrofit2.http.Query("datePosted[after]") datePostedAfter: String?,
-        @retrofit2.http.Query("datePosted[strictly_after]") datePostedStrictlyAfter: String?
-    ): Completable
-
-    /**
      * The endpoint is owned by junittests service owner
      */
     @Headers(
-            "X-Operation-ID: get_empty_endpoint"
+        "X-Operation-ID: get_empty_endpoint"
     )
-
     @GET("/empty_endpoint")
     fun getEmptyEndpoint(): Single<EmptyModel>
-
     /**
      * The endpoint is owned by junittests service owner
      * @param propertyFormat (required)
      */
     @Headers(
-            "X-Operation-ID: get_format_endpoint"
+        "X-Operation-ID: get_format_endpoint"
     )
-
     @GET("/format_endpoint/{property_format}")
     fun getFormatEndpoint(
         @retrofit2.http.Path("property_format") propertyFormat: String
     ): Single<FormatResponses>
-
     /**
      * The endpoint is owned by junittests service owner
      */
     @Headers(
-            "X-Operation-ID: get_nested_additional_properties"
+        "X-Operation-ID: get_nested_additional_properties"
     )
-
     @GET("/nested_additional_properties")
     fun getNestedAdditionalProperties(): Single<NestedAdditionalProperties>
-
     /**
      * The endpoint is owned by junittests service owner
      */
     @Headers(
-            "X-Operation-ID: get_nested_additional_properties_custom_description"
+        "X-Operation-ID: get_nested_additional_properties_custom_description"
     )
-
     @GET("/nested_additional_properties/custom_description")
     fun getNestedAdditionalPropertiesCustomDescription(): Single<NestedAdditionalPropertiesCustomDescription>
-
     /**
      * The endpoint is owned by junittests service owner
      * @param valueType (required)
      * @param size (required)
      */
     @Headers(
-            "X-Operation-ID: get_property_array"
+        "X-Operation-ID: get_property_array"
     )
-
     @GET("/property_array/{value_type}/{size}")
     fun getPropertyArray(
         @retrofit2.http.Path("value_type") valueType: String,
         @retrofit2.http.Path("size") size: String
     ): Single<PropertyArray>
-
     /**
      * The endpoint is owned by junittests service owner
      * @param valueType (required)
      * @param size (required)
      */
     @Headers(
-            "X-Operation-ID: get_property_map"
+        "X-Operation-ID: get_property_map"
     )
-
     @GET("/property_map/{value_type}/{size}")
     fun getPropertyMap(
         @retrofit2.http.Path("value_type") valueType: String,
         @retrofit2.http.Path("size") size: String
     ): Single<PropertyMap>
-
     /**
      * The endpoint is owned by junittests service owner
      */
     @Headers(
-            "X-Operation-ID: get_required_type_endpoint"
+        "X-Operation-ID: get_required_type_endpoint"
     )
-
     @GET("/required/type_endpoint")
     fun getRequiredTypeEndpoint(): Single<RequiredTypeResponses>
-
     /**
      * The endpoint is owned by junittests service owner
+     * @param `class` (optional)
+     * @param `data` (optional)
+     * @param `for` (optional)
+     * @param `operator` (optional)
+     * @param `val` (optional)
+     * @param `var` (optional)
+     * @param `when` (optional)
      */
     @Headers(
-            "X-Operation-ID: get_reserved_keywords"
+        "X-Operation-ID: get_reserved_keywords"
     )
-
     @GET("/reserved_keywords")
-    fun getReservedKeywords(): Single<ReservedKeywords>
-
+    fun getReservedKeywords(
+        @retrofit2.http.Query("class") `class`: String? = null,
+        @retrofit2.http.Query("data") `data`: String? = null,
+        @retrofit2.http.Query("for") `for`: String? = null,
+        @retrofit2.http.Query("operator") `operator`: String? = null,
+        @retrofit2.http.Query("val") `val`: String? = null,
+        @retrofit2.http.Query("var") `var`: String? = null,
+        @retrofit2.http.Query("when") `when`: String? = null
+    ): Single<ReservedKeywords>
+    /**
+     * Test symbols in parameter name
+     * Make sure that symbols in parameter name are treated properly
+     * The endpoint is owned by junittests service owner
+     * @param parameter (optional)
+     * @param brackets (optional)
+     * @param bracketsWithText (optional)
+     * @param dot (optional)
+     * @param dotWithText (optional)
+     */
+    @Headers(
+        "X-Operation-ID: getSymbolsInParameterName"
+    )
+    @GET("/symbols/in/parameter/name")
+    fun getSymbolsInParameterName(
+        @retrofit2.http.Query("parameter") parameter: String? = null,
+        @retrofit2.http.Query("brackets[]") brackets: String? = null,
+        @retrofit2.http.Query("brackets[withText]") bracketsWithText: String? = null,
+        @retrofit2.http.Query("dot.") dot: String? = null,
+        @retrofit2.http.Query("dot.withText") dotWithText: String? = null
+    ): Completable
     /**
      * The endpoint is owned by junittests service owner
      */
     @Headers(
-            "X-Operation-ID: get_top_level_enum"
+        "X-Operation-ID: get_top_level_enum"
     )
-
     @GET("/top_level_enum")
     fun getTopLevelEnum(): Single<TopLevelEnum>
-
+    /**
+     * The endpoint is owned by junittests service owner
+     */
+    @Headers(
+        "X-Operation-ID: get_top_level_enum_nested"
+    )
+    @GET("/top_level_enum/nested")
+    fun getTopLevelEnumNested(): Single<Map<String, Map<String, TopLevelEnum>>>
     /**
      * The endpoint is owned by junittests service owner
      * @param size (required)
      */
     @Headers(
-            "X-Operation-ID: get_top_level_map"
+        "X-Operation-ID: get_top_level_map"
     )
-
     @GET("/top_level_map/{size}")
     fun getTopLevelMap(
         @retrofit2.http.Path("size") size: String
     ): Single<TopLevelMap>
-
     /**
      * The endpoint is owned by junittests service owner
      * @param propertyType (required)
      */
     @Headers(
-            "X-Operation-ID: get_type_endpoint"
+        "X-Operation-ID: get_type_endpoint"
     )
-
     @GET("/type_endpoint/{property_type}")
     fun getTypeEndpoint(
         @retrofit2.http.Path("property_type") propertyType: String

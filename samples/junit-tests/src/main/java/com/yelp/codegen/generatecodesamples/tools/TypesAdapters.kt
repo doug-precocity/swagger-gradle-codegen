@@ -5,14 +5,14 @@ import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.internal.Util
-import org.threeten.bp.LocalDate
-import org.threeten.bp.ZonedDateTime
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.DateTimeException
-import org.threeten.bp.ZoneId
-import org.threeten.bp.format.DateTimeFormatter
 import java.lang.reflect.Type
 import java.math.BigDecimal
+import java.time.DateTimeException
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 /**
  * Moshi Factory to handle all the custom types we want to support,
@@ -20,9 +20,9 @@ import java.math.BigDecimal
  */
 class TypesAdapterFactory : JsonAdapter.Factory {
     private val types = mapOf<Type, JsonAdapter<*>>(
-            LocalDate::class.java to LocalDateAdapter(),
-            ZonedDateTime::class.java to ZonedDateTimeAdapter(),
-            BigDecimal::class.java to BigDecimalJsonAdapter()
+        LocalDate::class.java to LocalDateAdapter(),
+        ZonedDateTime::class.java to ZonedDateTimeAdapter(),
+        BigDecimal::class.java to BigDecimalJsonAdapter()
     )
 
     override fun create(type: Type, annotations: MutableSet<out Annotation>, moshi: Moshi): JsonAdapter<*>? {
@@ -59,8 +59,8 @@ internal class LocalDateAdapter : XNullableJsonAdapter<LocalDate>() {
 
     override fun fromNonNullString(nextString: String): LocalDate = LocalDate.parse(nextString, formatter)
 
-    override fun toJson(writer: JsonWriter?, value: LocalDate?) {
-        value?.let { writer?.value(it.format(formatter)) }
+    override fun toJson(writer: JsonWriter, value: LocalDate?) {
+        value?.let { writer.value(it.format(formatter)) }
     }
 }
 
@@ -76,15 +76,15 @@ internal class ZonedDateTimeAdapter : XNullableJsonAdapter<ZonedDateTime>() {
         }
     }
 
-    override fun toJson(writer: JsonWriter?, value: ZonedDateTime?) {
-        value?.let { writer?.value(it.format(formatter)) }
+    override fun toJson(writer: JsonWriter, value: ZonedDateTime?) {
+        value?.let { writer.value(it.format(formatter)) }
     }
 }
 
 internal class BigDecimalJsonAdapter : XNullableJsonAdapter<BigDecimal>() {
     override fun fromNonNullString(nextString: String) = BigDecimal(nextString)
 
-    override fun toJson(writer: JsonWriter?, value: BigDecimal?) {
-        value?.let { writer?.value(it) }
+    override fun toJson(writer: JsonWriter, value: BigDecimal?) {
+        value?.let { writer.value(it) }
     }
 }

@@ -4,9 +4,9 @@ import com.yelp.codegen.generatecodesamples.apis.XnullableApi
 import com.yelp.codegen.generatecodesamples.tools.MockServerApiRule
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -17,11 +17,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withEmptyString() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "string_array": []
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "string_array": []
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("string", "empty").blockingGet()
 
@@ -33,11 +37,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withEmptyNumber() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "number_array": []
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "number_array": []
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("number", "empty").blockingGet()
 
@@ -49,11 +57,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withNullString() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "string_array": null
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "string_array": null
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("string", "null").blockingGet()
 
@@ -63,11 +75,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withNullNumber() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "number_array": null
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "number_array": null
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("number", "null").blockingGet()
 
@@ -77,11 +93,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withOneNullString() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "string_array": [ null ]
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "string_array": [ null ]
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("string", "1null").blockingGet()
 
@@ -94,11 +114,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withOneNullNumber() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "number_array": [ null ]
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "number_array": [ null ]
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("number", "1null").blockingGet()
 
@@ -111,11 +135,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withTwoStrings() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "string_array": [ "value1", null ]
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "string_array": [ "value1", null ]
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("string", "2").blockingGet()
 
@@ -129,11 +157,15 @@ class XnullablePropertyArrayEndpointTest {
 
     @Test
     fun xNullablePropertyArray_withTwoNumbers() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "number_array": [ 1.1, null ]
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "number_array": [ 1.1, null ]
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullablePropertyArray("number", "2").blockingGet()
 

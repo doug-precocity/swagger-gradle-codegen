@@ -5,9 +5,9 @@ import com.yelp.codegen.generatecodesamples.models.XnullableMap
 import com.yelp.codegen.generatecodesamples.tools.MockServerApiRule
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -18,19 +18,23 @@ class XnullableNestedAdditionalPropertiesEndpointTest {
 
     @Test
     fun xNullableNestedAdditionalProperties() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "key1": {
-                    "subkey1": "subvalue1",
-                    "subkey2": null
-                },
-                "key2": {
-                    "subkey1": null
-                },
-                "key3": {},
-                "key4": null
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "key1": {
+                        "subkey1": "subvalue1",
+                        "subkey2": null
+                    },
+                    "key2": {
+                        "subkey1": null
+                    },
+                    "key3": {},
+                    "key4": null
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<XnullableApi>().getXnullableNestedAdditionalProperties().blockingGet()
 

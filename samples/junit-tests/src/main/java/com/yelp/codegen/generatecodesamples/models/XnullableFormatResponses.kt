@@ -7,16 +7,17 @@
 package com.yelp.codegen.generatecodesamples.models
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import com.yelp.codegen.generatecodesamples.tools.XNullable
-import org.threeten.bp.LocalDate
-import org.threeten.bp.ZonedDateTime
+import java.time.LocalDate
+import java.time.ZonedDateTime
 
 /**
- *
  * @property dateProperty
  * @property datetimeProperty
  * @property doubleProperty
  */
+@JsonClass(generateAdapter = true)
 data class XnullableFormatResponses(
     @Json(name = "date_property") @field:Json(name = "date_property") @XNullable var dateProperty: LocalDate? = null,
     @Json(name = "datetime_property") @field:Json(name = "datetime_property") @XNullable var datetimeProperty: ZonedDateTime? = null,

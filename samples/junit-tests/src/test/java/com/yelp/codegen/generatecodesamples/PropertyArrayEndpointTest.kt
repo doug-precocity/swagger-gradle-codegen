@@ -3,10 +3,10 @@ package com.yelp.codegen.generatecodesamples
 import com.yelp.codegen.generatecodesamples.apis.ResourceApi
 import com.yelp.codegen.generatecodesamples.tools.MockServerApiRule
 import okhttp3.mockwebserver.MockResponse
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
@@ -17,11 +17,15 @@ class PropertyArrayEndpointTest {
 
     @Test
     fun propertyArray_withEmptyString() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "string_array": []
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "string_array": []
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<ResourceApi>().getPropertyArray("string", "empty").blockingGet()
 
@@ -33,11 +37,15 @@ class PropertyArrayEndpointTest {
 
     @Test
     fun propertyArray_withEmptyNumber() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "number_array": []
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "number_array": []
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<ResourceApi>().getPropertyArray("number", "empty").blockingGet()
 
@@ -49,14 +57,18 @@ class PropertyArrayEndpointTest {
 
     @Test
     fun propertyArray_withNonEmptyString() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "string_array": [
-                    "value1",
-                    "value2"
-                ]
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "string_array": [
+                        "value1",
+                        "value2"
+                    ]
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<ResourceApi>().getPropertyArray("string", "2").blockingGet()
 
@@ -70,14 +82,18 @@ class PropertyArrayEndpointTest {
 
     @Test
     fun propertyArray_withNonEmptyNumber() {
-        rule.server.enqueue(MockResponse().setBody("""
-            {
-                "number_array": [
-                    1.1,
-                    2.2
-                ]
-            }
-        """.trimIndent()))
+        rule.server.enqueue(
+            MockResponse().setBody(
+                """
+                {
+                    "number_array": [
+                        1.1,
+                        2.2
+                    ]
+                }
+                """.trimIndent()
+            )
+        )
 
         val returned = rule.getApi<ResourceApi>().getPropertyArray("number", "2").blockingGet()
 

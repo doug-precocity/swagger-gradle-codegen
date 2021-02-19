@@ -7,15 +7,16 @@
 package com.yelp.codegen.generatecodesamples.models
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.math.BigDecimal
 
 /**
- *
  * @property booleanProperty
  * @property integerProperty
  * @property numberProperty
  * @property stringProperty
  */
+@JsonClass(generateAdapter = true)
 data class TypeResponses(
     @Json(name = "boolean_property") @field:Json(name = "boolean_property") var booleanProperty: Boolean? = null,
     @Json(name = "integer_property") @field:Json(name = "integer_property") var integerProperty: Int? = null,

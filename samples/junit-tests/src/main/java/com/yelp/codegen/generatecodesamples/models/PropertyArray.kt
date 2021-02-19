@@ -7,13 +7,14 @@
 package com.yelp.codegen.generatecodesamples.models
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.math.BigDecimal
 
 /**
- *
  * @property numberArray
  * @property stringArray
  */
+@JsonClass(generateAdapter = true)
 data class PropertyArray(
     @Json(name = "number_array") @field:Json(name = "number_array") var numberArray: List<BigDecimal>? = null,
     @Json(name = "string_array") @field:Json(name = "string_array") var stringArray: List<String>? = null
